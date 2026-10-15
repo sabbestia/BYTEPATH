@@ -2,13 +2,20 @@
 =======================================================
 
 **hump** is a set of lightweight helpers for the awesome `LÖVE
-<http://love2d.org>`_ game framework.  It will help to get you over the initial
-hump when starting to build a new game.
+<http://love2d.org>`_ game framework.
+It will help to get you over the initial hump when starting to build a new
+game.
 
-**hump** differs from many other libraries in that every component is
-independent of the remaining ones.
-The footprint is very small, so the library should fit nicely into your
-projects.
+**hump** does nothing that you couldn't do yourself.
+But why should you?
+You want to write games, not boilerplate!
+
+**hump**'s components are so loosely coupled that every component is
+independent of the others.
+You can choose what you need and leave the rest behind.
+hump won't judge.
+
+**hump** just wants to make you happy.
 
 Read on
 -------
@@ -39,7 +46,7 @@ Using `Git <http://git-scm.com>`_, you can clone the project by running:
 
     git clone git://github.com/vrld/hump
 
-Once done, tou can check for updates by running
+Once done, you can check for updates by running
 
     git pull
 
