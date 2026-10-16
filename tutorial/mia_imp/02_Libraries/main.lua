@@ -2,6 +2,18 @@ Object = require("lib.classic.classic")
 require"lib.requirehelper.recursiveEnumerate"
 require"lib.requirehelper.requireFiles"
 local Timer = require "lib.hump.timer"
+vec = require"lib.hump.vector"
+
+local rect1 = {
+  pos = vec(200,200),
+  w = 200,
+  h =50
+}
+local rect2 = {
+  pos = vec(rect1.pos.x + rect1.w / 2 - 25,rect1.pos.y - rect1.h / 2 -50),
+  w = 50,
+  h =200
+  }
 
 
 function love.load()
@@ -9,7 +21,7 @@ function love.load()
   recursiveEnumerate("obj",lista_file)
   requireFiles(lista_file)
   circle = Circle(50,50,24)
-  hyper = HyperCircle:new(400,300,15,3,19)
+  hyper = HyperCircle:new(0,0,15,3,19)
   timer = Timer()
   timer:tween(1,hyper,{outer_radius = 50},"in-out-elastic", function()
       timer:tween(1.2,hyper,{outer_radius = 25},"out-elastic") 
@@ -29,6 +41,8 @@ function love.update(dt)
 function love.draw()
 	circle:draw()
   hyper:draw()
+  love.graphics.rectangle("fill",rect1.pos.x,rect1.pos.y,rect1.w,rect1.h)
+  love.graphics.rectangle("fill",rect2.pos.x,rect2.pos.y,rect2.w,rect2.h)
 end
 
 
