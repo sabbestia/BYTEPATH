@@ -4,24 +4,18 @@ require"lib.requirehelper.requireFiles"
 local Timer = require "lib.hump.timer"
 vec = require"lib.hump.vector"
 
-local rect1 = {
-  pos = vec(200,200),
-  w = 200,
-  h =50
-}
-local rect2 = {
-  pos = vec(rect1.pos.x + rect1.w / 2 - 25,rect1.pos.y - rect1.h / 2 -50),
-  w = 50,
-  h =200
-  }
-
 
 function love.load()
   local lista_file = {}
   recursiveEnumerate("obj",lista_file)
   requireFiles(lista_file)
+  
+  
+  cross = Cross(200,100,100,30)
   circle = Circle(50,50,24)
   hyper = HyperCircle:new(0,0,15,3,19)
+  
+  
   timer = Timer()
   timer:tween(1,hyper,{outer_radius = 50},"in-out-elastic", function()
       timer:tween(1.2,hyper,{outer_radius = 25},"out-elastic") 
@@ -31,6 +25,27 @@ function love.load()
             timer:tween(0.1, circle, {radius = 4}, 'in-out-cubic')
         end)
     end)
+  
+  
+   -- Esercizio 21
+  for i=1,10, 1 do
+    timer:after(0.5 * i, function() print(math.random()) end)
+  end
+  
+  --Esercizio 22, la stramaledettissima croce
+   --timer:tween(1,hyper,{outer_radius = 50},"in-out-elastic")
+  timer:tween(1,cross.braccio1, {s = 0},"in-out-cubic", function()
+      timer:tween(1,cross.braccio2, {s=0},"in-out-cubic", function()
+          timer:tween(2,cross.braccio1, {s = 30}, "in-out-cubic")
+          timer:tween(2,cross.braccio2, {s = 30}, "in-out-cubic")
+        end)
+      end)
+    -- Si e vaffanculo
+    
+  
+    
+  
+  
 end
 
 function love.update(dt)
@@ -41,36 +56,16 @@ function love.update(dt)
 function love.draw()
 	circle:draw()
   hyper:draw()
-  love.graphics.rectangle("fill",rect1.pos.x,rect1.pos.y,rect1.w,rect1.h)
-  love.graphics.rectangle("fill",rect2.pos.x,rect2.pos.y,rect2.w,rect2.h)
+  cross:draw()
 end
 
 
---[[
-function recursiveEnumerate(folder, file_list)
-	local items = love.filesystem.getDirectoryItems(folder)
-	for _,item in ipairs(items) do
-		local file = folder .. "/" .. item
-		local info = love.filesystem.getInfo(file)
-		if info then
-			if info.type == "file" then
-				table.insert(file_list, file)
-			elseif info.type == "directory" then
-				recursiveEnumerate(file, file_list)
-			end
-		end
-	end
-end
-
-
-
-function requireFiles(files)
-	for _,filepath in ipairs(files) do
-		local filepath = filepath:sub(1,-5)
-		local parts = split(filepath,"/")
-		local class = parts[#parts]
-		_G[class] = require(filepath)
-	end
-end
-
-]]--
+function love.keypressed(key)
+  if key == "z" then
+    if handle1 then
+      timer:cancel(handle1)
+    end  
+     handle1 = timer:after(1, function() print("ehi") end)
+   end
+ end
+ 
