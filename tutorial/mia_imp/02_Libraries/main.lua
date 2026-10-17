@@ -1,7 +1,7 @@
 Object = require("lib.classic.classic")
 require"lib.requirehelper.recursiveEnumerate"
 require"lib.requirehelper.requireFiles"
-local Timer = require "lib.hump.timer"
+local Timer = require "lib.chrono.Timer"
 vec = require"lib.hump.vector"
 
 
@@ -11,9 +11,14 @@ function love.load()
   requireFiles(lista_file)
   
   
+  
+  testPad = TestPad(200,200,30)
+  
+  
   cross = Cross(200,100,100,30)
   circle = Circle(50,50,24)
   hyper = HyperCircle:new(0,0,15,3,19)
+  health = HealthBar(300,300,100)
   
   
   timer = Timer()
@@ -32,24 +37,25 @@ function love.load()
     timer:after(0.5 * i, function() print(math.random()) end)
   end
   
+  
+  
+  
+  timer:tween(1,hyper,{outer_radius = 50},"in-out-elastic")
   --Esercizio 22, la stramaledettissima croce
-   --timer:tween(1,hyper,{outer_radius = 50},"in-out-elastic")
+  
   timer:tween(1,cross.braccio1, {s = 0},"in-out-cubic", function()
       timer:tween(1,cross.braccio2, {s=0},"in-out-cubic", function()
           timer:tween(2,cross.braccio1, {s = 30}, "in-out-cubic")
           timer:tween(2,cross.braccio2, {s = 30}, "in-out-cubic")
         end)
       end)
-    -- Si e vaffanculo
-    
-  
-    
-  
   
 end
 
 function love.update(dt)
   timer:update(dt)
+  testPad:update(dt)
+
 
   end
   
@@ -57,15 +63,20 @@ function love.draw()
 	circle:draw()
   hyper:draw()
   cross:draw()
+  health:draw()
+  testPad:draw()
 end
 
 
 function love.keypressed(key)
   if key == "z" then
-    if handle1 then
-      timer:cancel(handle1)
-    end  
-     handle1 = timer:after(1, function() print("ehi") end)
+    timer:after(1, function() print("ehi") end,"z_key_press")
    end
+  if key == "d" then
+    health:takeDamage(20)
+  end
+  if key == "escape" then
+    love.event.quit()
+  end
  end
  
