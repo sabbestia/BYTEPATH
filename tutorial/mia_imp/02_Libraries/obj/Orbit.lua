@@ -23,8 +23,8 @@ function Orbit:update(dt)
 function Orbit:draw()
   Orbit.super:draw()
   love.graphics.push("all")
-  love.graphics.translate(self.pos.x,self.pos.y)
-  love.graphics.circle("fill",self.pos_planet.x,self.pos_planet.y, self.planet_radius)
+    love.graphics.translate(self.pos.x,self.pos.y)
+    love.graphics.circle("fill",self.pos_planet.x,self.pos_planet.y, self.planet_radius)
   love.graphics.pop()
 end
 
