@@ -5,6 +5,7 @@ require("libs.utils.random_dec")
 Input = require("libs.boipushy.Input")
 Timer = require "libs.chrono.Timer"
 M = require "libs.Moses.moses"
+vec = require "libs.hump.vector"
 
 GameObject = require "objs.GameObject" -- tocca chiamarlo esplicitamente qui
                                        -- per questioni di ordinamento alfabetico
@@ -67,6 +68,7 @@ function love.keypressed(key)
   elseif key == "f5" then gotoRoom("Stage49")
   elseif key == "f6" then gotoRoom("Stage59")
   elseif key == "f7" then gotoRoom("Stage60")
+  elseif key == "f8" then gotoRoom("Stage61")
 
   end
 end

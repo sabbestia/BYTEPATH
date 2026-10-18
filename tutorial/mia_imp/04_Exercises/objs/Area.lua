@@ -32,5 +32,20 @@ function Area:getGameObjects(filter)
   return out
 end
 
+function Area:queryCircleArea(x,y,r,classes)
+  local out = {}
+  for _,object in ipairs(self.game_objects) do
+    if M.any(classes, object.class) then
+      local obj_pos = vec(object.x,object.y)
+      local shot = vec(x,y)
+      if obj_pos:dist(shot) < r then
+        table.insert(out,object)
+      end
+    end
+  end
+  return out
+end
+
+
 
 return Area
