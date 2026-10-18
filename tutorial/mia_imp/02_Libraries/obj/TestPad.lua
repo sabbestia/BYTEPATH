@@ -1,3 +1,5 @@
+--- non funzia!
+
 local TestPad = Object:extend()
 
 function TestPad:new(x,y,radius)
