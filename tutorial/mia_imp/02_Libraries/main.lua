@@ -29,6 +29,19 @@ function love.load()
   circleManual = Circle(love.graphics.getWidth() / 2 ,400,50)
   
   
+  orb = Orbit(love.graphics.getWidth() / 4 * 3, --x
+    400,  --y
+    20,   --r
+    5,    --line_w
+    50,   --out_r
+    5,    --planet_radius
+    3,   --v_rot
+    20,    --amplitude,
+    8     --frequency
+    
+    )
+  
+  
   timer = Timer()
   
   -- Transizione hyper
@@ -67,6 +80,7 @@ end
 function love.update(dt)
   timer:update(dt)
  -- testPad:update(dt)   non so perché l'ho messo qua che mi inquina tutto
+ orb:update(dt)
   end
   
 function love.draw()
@@ -77,6 +91,7 @@ function love.draw()
 --  testPad:draw()
   circleForever:draw()
   circleManual:draw()
+  orb:draw()
 end
 
 
