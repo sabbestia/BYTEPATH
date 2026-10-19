@@ -1,9 +1,8 @@
 local Stage61 = Stage:extend()
 
 function Stage61:new()
+  Stage61.super:new()
   love.mouse.setVisible(false)
-  self.area = Area()
-  self.timer = Timer()
   
   self.input = Input()
   self.input:bind('d',"destroy_rectangle")
@@ -11,7 +10,7 @@ function Stage61:new()
   self.pointer = self.area:addGameObject("Pointer",0,0, {class="Pointer"})
   
   for i =1,10 do
-    self.area:addGameObject("Circle60",
+    self.area:addGameObject("EnemyCircle",
       random_dec(0,800),
       random_dec(0,610),
       {class = "Enemy"}
@@ -23,11 +22,10 @@ function Stage61:new()
 end
 
 function Stage61:update(dt)
-  self.area:update(dt)
-  self.timer:update(dt)
+  Stage61.super:update(dt)
   if M.count(M.filter(self.area.game_objects, function(v) return   v.class == "Enemy" end)) == 0 then
        for i =1,10 do
-    self.area:addGameObject("Circle60",
+    self.area:addGameObject("EnemyCircle",
       random_dec(0,800),
       random_dec(0,610),
       {class = "Enemy"}
@@ -60,18 +58,13 @@ function Stage61:update(dt)
 
   if self.input:pressed("destroy_rectangle") then
        --self.area.game_objects[love.math.random(#self.area.game_objects)].dead = true
-        table.remove(self.area.game_objects,love.math.random(#self.area.game_objects))
-    if #self.area.game_objects == 0 then
-      for i =1,10 do
-        self.area:addGameObject("Circle60",random_dec(0,800),random_dec(0,610))
-      end
-    end
+        self.area.game_objects[love.math.random(#self.area.game_objects)].dead = true
   end
-  end  -- Fine update
+end  -- Fine update
 
 
 function Stage61:draw()
-  self.area:draw()
+  Stage61.super:draw()
 end
 
 return Stage61
