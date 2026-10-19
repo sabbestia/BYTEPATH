@@ -46,6 +46,15 @@ function Area:queryCircleArea(x,y,r,classes)
   return out
 end
 
-
+function Area:getClosestObject(x,y,r,classes)
+  local objects = self:QueryCircleArea(x,y,r,classes)
+  table.sort(objects, 
+    function(a,b)
+      pos_orig = vec(x,y)
+      pos_a = vec(a.x,a.y) pos_b = vec(b.x,b.y)
+      return pos_orig:dist(pos_a) < pos_orig:dist(pos_b)
+    end)
+  return objects[1]
+end
 
 return Area
