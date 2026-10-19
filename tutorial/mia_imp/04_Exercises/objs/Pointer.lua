@@ -23,7 +23,7 @@ end
 
 function Pointer:spara()
   self.timer:tween(0.02,self,{radius = 15},'in-quint',function()
-      self.timer:tween(0.05, self, {radius = 4}, 'out-linear') end)
+      self.timer:tween(0.05, self, {radius = 4}, 'linear') end)
 end
 
 

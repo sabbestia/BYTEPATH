@@ -14,5 +14,9 @@ function EnemyCircle:draw()
   love.graphics.circle("fill",self.x, self.y,self.radius)
 end
 
+function EnemyCircle:muori()
+  self.timer:tween(0.2, self, {radius = 0.1}, 'in-out-elastic', function() self.dead = true end)
+end
+
 return EnemyCircle
 
