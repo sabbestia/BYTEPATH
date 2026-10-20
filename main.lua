@@ -1,5 +1,5 @@
-Steam = require 'libraries/steamworks'
-if type(Steam) == 'boolean' then Steam = nil end
+--Steam = require 'libraries/steamworks'
+--if type(Steam) == 'boolean' then Steam = nil end
 
 Object = require 'libraries/classic/classic'
 Timer = require 'libraries/enhanced_timer/EnhancedTimer'
