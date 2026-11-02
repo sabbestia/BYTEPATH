@@ -69,6 +69,7 @@ function love.keypressed(key)
   elseif key == "f6" then gotoRoom("Stage59")
   elseif key == "f7" then gotoRoom("Stage60")
   elseif key == "f8" then gotoRoom("Stage61")
+  elseif key == "f9" then gotoRoom("StageSpara")
 
   end
 end
